@@ -45,8 +45,9 @@
 		<script type="text/javascript" src="https://cdn.bootcss.com/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 
 		<script type="text/javascript" src="/data.js"></script>
+		<script type="text/javascript" src="/delta.js"></script>
 
-		<canvas id="myChart" width="400" height="400"></canvas>
+		<canvas id="myChart" width="400" height="300"></canvas>
 		<script>
 			var ctx = document.getElementById('myChart').getContext('2d');
 			var config = {
@@ -77,6 +78,47 @@
 						}],
 						yAxes: [{
 							display: true,
+						}]
+					}
+				}
+			};
+			var myChart = new Chart(ctx, config);
+		</script>
+
+		<canvas id="deltaChart" width="400" height="300"></canvas>
+		<script>
+			var ctx = document.getElementById('deltaChart').getContext('2d');
+			var config = {
+				type: 'bar',
+				data: {
+					datasets: [{
+						label: '一阶差分',
+						backgroundColor: 'rgba(0, 0, 255, 0.5)',
+						borderColor: '#000000',
+						lineTension: 0,
+						fill: false,
+						data: delta
+					}]
+				},
+				options: {
+					responsive: true,
+					scales: {
+						xAxes: [{
+							type: 'time',
+							time: {
+								unit: 'day'
+							},
+							display: true,
+							scaleLabel: {
+								display: true,
+								labelString: '日期'
+							},
+						}],
+						yAxes: [{
+							display: true,
+							ticks: {
+								beginAtZero: true
+							}
 						}]
 					}
 				}
